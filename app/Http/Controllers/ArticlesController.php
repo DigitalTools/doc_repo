@@ -60,8 +60,8 @@ class ArticlesController extends Controller
         $annotation = $language->analyzeSentiment($text);
         $sentiment = $annotation->sentiment();
         */
-        $sentiment = 0;
-        return view('articles.show', compact('article', 'sentiment'));
+        //$sentiment = 0;
+        return view('articles.show', compact('article'));
     }
 
     public function destroy($id)

@@ -17,9 +17,8 @@
                     <div class="article-info">
                         <p>{{ str_limit($article->body, 825) }}</p>
                         <p>Registered on: {{ $article->created_at->diffForHumans() }}</p>
-                        <!--<p>Score: {{ $sentiment['score'] }}</p>
-                        <p>Magnitude: {{ $sentiment['magnitude'] }}</p>
-                        -->
+                        <p>Score: {{ $article->score }}</p>
+                        <p>Magnitude: {{ $article->magnitude }}</p>
                     </div>
 
                     <p>

@@ -14,7 +14,8 @@ class AddSentimentToArticlesTable extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            //
+            $table->decimal('score', 3, 2);
+            $table->decimal('magnitude', 4, 2);
         });
     }
 
@@ -26,7 +27,7 @@ class AddSentimentToArticlesTable extends Migration
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {
-            //
+            $table->dropColumn(['score', 'magnitude']);
         });
     }
 }

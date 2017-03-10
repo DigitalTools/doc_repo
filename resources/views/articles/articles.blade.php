@@ -35,8 +35,8 @@
                                         </a>
                                     </td>
                                     <td>{{ $article->updated_at }}</td>
-                                    <td>{{ $article->updated_at }}</td>
-                                    <td>{{ $article->updated_at }}</td>
+                                    <td>{{ $article->score }}</td>
+                                    <td>{{ $article->magnitude }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
