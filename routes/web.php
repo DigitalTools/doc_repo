@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/register_article', 'ArticlesController@register');
 Route::post('/register_article', 'ArticlesController@store');
 
-Route::get('/articles', 'ArticlesController@articles');
+Route::get('/articles', 'ArticlesController@articles')->name('articles.index');
 
 Route::get('/article/{id}', 'ArticlesController@show');
+Route::delete('/article/{id}', 'ArticlesController@destroy')->name('article.destroy');

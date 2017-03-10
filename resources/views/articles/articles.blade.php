@@ -5,6 +5,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+
+            @include('includes.flash')
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-ticket"> My Articles</i>

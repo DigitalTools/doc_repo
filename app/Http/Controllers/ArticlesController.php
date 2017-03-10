@@ -64,4 +64,13 @@ class ArticlesController extends Controller
         return view('articles.show', compact('article', 'sentiment'));
     }
 
+    public function destroy($id)
+    {
+        #$affectedRows = Article::where('id', $id)->delete();
+        $article = Article::findOrFail($id);
+        $article->delete();
+        //'Task successfully deleted!'
+        return redirect()->route('articles.index')->with("status", "Article \"$article->title\" has been deleted.");;
+    }
+
 }

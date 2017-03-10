@@ -22,6 +22,13 @@
                         -->
                     </div>
 
+                    <p>
+                        {{ Form::open([ 'method' => 'DELETE', 'route' => ['article.destroy', $article->id] ]) }}
+                            {{ Form::hidden('id', $article->id) }}
+                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                        {{ Form::close() }}
+                    </p>
+
                 </div>
 
             </div>
