@@ -8,6 +8,7 @@ use App\Author;
 use Illuminate\Support\Facades\Auth;
 use Google\Cloud\NaturalLanguage\NaturalLanguageClient;
 use Google\Cloud\NaturalLanguage\Annotation;
+//use Illuminate\Support\Facades\Log;
 
 class ArticlesController extends Controller
 {
@@ -60,20 +61,27 @@ class ArticlesController extends Controller
 
         foreach ($articles as $key => $article) {
             
-            # The text to analyze
-            $text = $article->body;
+            if ( is_null($article->score) ) {
+                //$title = $article->title;
+                ///$error_message = 'Score updated to: '.$title;
+                //Log::info($error_message);
 
-            # Detects the sentiment of the text
-            $annotation = $language->analyzeSentiment($text);
-            $sentiment = $annotation->sentiment();
-            
-            $score = $sentiment['score'];
-            $magnitude = $sentiment['magnitude'];
+                # The text to analyze
+                $text = $article->body;
 
-            $article->score = $score;
-            $article->magnitude = $magnitude;
+                # Detects the sentiment of the text
+                $annotation = $language->analyzeSentiment($text);
+                $sentiment = $annotation->sentiment();
+                
+                $score = $sentiment['score'];
+                $magnitude = $sentiment['magnitude'];
 
-            $article->save();
+                $article->score = $score;
+                $article->magnitude = $magnitude;
+
+                $article->save();
+
+            }
 
         }
 
