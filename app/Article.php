@@ -9,7 +9,12 @@ class Article extends Model
     //
 
     protected $fillable = [
-        'user_id', 'title', 'body'
+        'user_id', 'title', 'body', 'author_id'
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 
 }

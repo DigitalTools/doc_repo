@@ -28,6 +28,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('author') ? ' has-error' : '' }}">
+                            <label for="author" class="col-md-4 control-label">author</label>
+
+                            <div class="col-md-6">
+                                <select id="author" type="author" class="form-control" name="author">
+                                    <option value="">Select Author</option>
+                                    @foreach ($authors as $author)
+                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('author'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('author') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                             <label for="body" class="col-md-4 control-label">Body</label>
 

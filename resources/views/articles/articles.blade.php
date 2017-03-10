@@ -21,7 +21,7 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Last Updated</th>
+                                    <th>Author</th>
                                     <th>Score</th>
                                     <th>Magnitude</th>
                                 </tr>
@@ -34,7 +34,12 @@
                                             {{ $article->title }}
                                         </a>
                                     </td>
-                                    <td>{{ $article->updated_at }}</td>
+                                    <td>
+                                    @foreach ($authors as $author)
+                                        @if ($author->id === $article->author_id)
+                                            {{ $author->alias }}
+                                        @endif
+                                    @endforeach</td>
                                     <td>{{ $article->score }}</td>
                                     <td>{{ $article->magnitude }}</td>
                                 </tr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\Author;
 use Illuminate\Support\Facades\Auth;
 use Google\Cloud\NaturalLanguage\NaturalLanguageClient;
 use Google\Cloud\NaturalLanguage\Annotation;
@@ -13,20 +14,23 @@ class ArticlesController extends Controller
 
     public function register()
     {
-        return view('articles.register');
+        $authors = Author::all();
+        return view('articles.register', compact('authors'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
                 'title'     => 'required',
-                'body'   => 'required'
+                'body'   => 'required',
+                'author'   => 'required'
             ]);
 
             $article = new Article([
                 'title'     => $request->input('title'),
                 'user_id'   => Auth::user()->id,
-                'body'   => $request->input('body')
+                'body'   => $request->input('body'),
+                'author_id'   => $request->input('author')
             ]);
 
             $article->save();
@@ -37,14 +41,15 @@ class ArticlesController extends Controller
     public function articles()
     {
         $articles = Article::where('user_id', Auth::user()->id)->paginate(10);
+        //$this->updateSentiment($articles);
+        $authors = Author::all();
 
-        return view('articles.articles', compact('articles'));
+        return view('articles.articles', compact('articles', 'authors'));
     }
 
-    public function show($id)
+    private function updateSentiment($articles)
     {
-        $article = Article::where('id', $id)->firstOrFail();
-        /*
+
         # Your Google Cloud Platform project ID
         $projectId = 'npl-007';
 
@@ -53,14 +58,30 @@ class ArticlesController extends Controller
             'projectId' => $projectId
         ]);
 
-        # The text to analyze
-        $text = $article->body;
+        foreach ($articles as $key => $article) {
+            
+            # The text to analyze
+            $text = $article->body;
 
-        # Detects the sentiment of the text
-        $annotation = $language->analyzeSentiment($text);
-        $sentiment = $annotation->sentiment();
-        */
-        //$sentiment = 0;
+            # Detects the sentiment of the text
+            $annotation = $language->analyzeSentiment($text);
+            $sentiment = $annotation->sentiment();
+            
+            $score = $sentiment['score'];
+            $magnitude = $sentiment['magnitude'];
+
+            $article->score = $score;
+            $article->magnitude = $magnitude;
+
+            $article->save();
+
+        }
+
+    }
+
+    public function show($id)
+    {
+        $article = Article::where('id', $id)->firstOrFail();
         return view('articles.show', compact('article'));
     }
 
