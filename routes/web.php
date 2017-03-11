@@ -33,6 +33,8 @@ Route::get('/articles/by_author/{author_id}', 'ArticlesController@articlesByAuth
 
 Route::get('/author/{id}', 'AuthorsController@show');
 Route::get('/authors', 'AuthorsController@authors')->name('authors.index');
+Route::get('/authors/register', 'AuthorsController@register');
+Route::post('/authors/register', 'AuthorsController@store');
 
 Route::get('/url', 'Source\ListController@input');
 Route::post('/url', 'Source\ListController@parse');

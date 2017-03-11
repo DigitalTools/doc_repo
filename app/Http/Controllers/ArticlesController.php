@@ -74,7 +74,7 @@ class ArticlesController extends Controller
 
         foreach ($articles as $key => $article) {
             
-            if ( !empty($article->body) && $article->magnitude == 0 ) {
+            if ( !empty($article->body) && is_null($article->magnitude) ) {
                 $title = $article->title;
                 $error_message = 'Updating score to: '.$title;
                 Log::info($error_message);

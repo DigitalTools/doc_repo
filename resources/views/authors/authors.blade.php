@@ -14,6 +14,12 @@
                 </div>
 
                 <div class="panel-body">
+                    <a href="{{ url('/authors/register') }}">
+                      <span class="btn btn-primary">Add New</span>
+                    </a>
+                </div>
+
+                <div class="panel-body">
                     @if ($authors->isEmpty())
                         <p>You have not created any author.</p>
                     @else
@@ -37,10 +43,9 @@
                             @endforeach
                             </tbody>
                         </table>
-
-                        
                     @endif
                 </div>
+
             </div>
         </div>
     </div>

@@ -14,6 +14,7 @@ class AuthorsController extends Controller
 
         $author = Author::find($id);
         $articles = $author->articles()->get();
+
         /*
         $filename = $author->alias . '.csv';
 
@@ -96,6 +97,28 @@ class AuthorsController extends Controller
     {
         $authors = Author::all();
         return view('authors.authors', compact('authors'));
+    }
+
+    public function register()
+    {
+        return view('authors.register');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name'     => 'required',
+            'alias'   => 'required'
+        ]);
+
+        $author = new Author([
+            'name'     => $request->input('name'),
+            'alias'   => $request->input('alias')
+        ]);
+
+        $author->save();
+
+        return redirect()->back()->with("status", "Author \"$author->name\" has been registered.");
     }
 
 }
