@@ -17,6 +17,7 @@
                     <div class="article-info">
                         <p>URL: {{ $article->url }}</p>
                         <p>{{ str_limit($article->body, 825) }}</p>
+                        <p>Published on: {{ $article->published_on }}</p>
                         <p>Registered on: {{ $article->created_at->diffForHumans() }}</p>
                         <p>Score: {{ $article->score }}</p>
                         <p>Magnitude: {{ $article->magnitude }}</p>

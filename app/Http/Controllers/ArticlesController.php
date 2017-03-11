@@ -24,14 +24,16 @@ class ArticlesController extends Controller
         $this->validate($request, [
             'title'     => 'required',
             'body'   => 'required',
-            'author'   => 'required'
+            'author'   => 'required',
+            'url'   => 'required'
         ]);
 
         $article = new Article([
             'title'     => $request->input('title'),
             'user_id'   => Auth::user()->id,
             'body'   => $request->input('body'),
-            'author_id'   => $request->input('author')
+            'author_id'   => $request->input('author'),
+            'url'   => $request->input('url')
         ]);
 
         $article->save();
@@ -54,7 +56,6 @@ class ArticlesController extends Controller
         $author = Author::find($author_id);
         $articles = $author->articles()->paginate(10);
         //$articles = $author->articles()->where('score', NULL)->get();
-        //$articles = Article::where('user_id', Auth::user()->id)->where('id', 17)->paginate(10);
         //$this->updateSentiment($articles);
         return view('articles.articlesbyAuthor', compact('author', 'articles'));
     }
@@ -73,7 +74,7 @@ class ArticlesController extends Controller
 
         foreach ($articles as $key => $article) {
             
-            if ( is_null($article->score) ) {
+            if ( !empty($article->body) && $article->magnitude == 0 ) {
                 $title = $article->title;
                 $error_message = 'Updating score to: '.$title;
                 Log::info($error_message);
@@ -102,6 +103,12 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::where('id', $id)->firstOrFail();
+
+        if (empty($article->body)) {
+            $listController = new Source\ListController();
+            $listController->parseArticleRMP($article->url);
+        };
+
         return view('articles.show', compact('article'));
     }
 

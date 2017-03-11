@@ -42,6 +42,10 @@
                           <td>Max</td>
                           <td>{{ $stats['score']['max'] }}</td>
                         </tr>
+                        <tr>
+                          <td>StdDev</td>
+                          <td>{{ round($stats['score']['stddev'], 2) }}</td>
+                        </tr>
                     </table>
                     Magnitude:
                     <table class="table">
@@ -56,6 +60,10 @@
                         <tr>
                           <td>Max</td>
                           <td>{{ $stats['magnitude']['max'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>StdDev</td>
+                          <td>{{ round($stats['magnitude']['stddev'], 2) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -73,7 +81,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($maxScored as $article)
+                        @foreach ($rank['maxScored'] as $article)
                             <tr>
                                 <td>
                                     <a href="{{ url('article/'. $article->id) }}">
@@ -101,7 +109,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($minScored as $article)
+                        @foreach ($rank['minScored'] as $article)
                             <tr>
                                 <td>
                                     <a href="{{ url('article/'. $article->id) }}">
@@ -109,6 +117,61 @@
                                     </a>
                                 </td>
                                 <td>{{ $article->score }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                Max Magnitude:
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Magnitude</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($rank['maxMag'] as $article)
+                            <tr>
+                                <td>
+                                    <a href="{{ url('article/'. $article->id) }}">
+                                        {{ $article->title }}
+                                    </a>
+                                </td>
+                                <td>{{ $article->magnitude }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+                <div class="panel-body">
+
+                Min Magnitude:
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Magnitude</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($rank['minMag'] as $article)
+                            <tr>
+                                <td>
+                                    <a href="{{ url('article/'. $article->id) }}">
+                                        {{ $article->title }}
+                                    </a>
+                                </td>
+                                <td>{{ $article->magnitude }}</td>
                             </tr>
                         @endforeach
                         </tbody>

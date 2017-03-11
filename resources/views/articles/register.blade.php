@@ -28,8 +28,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
+                            <label for="url" class="col-md-4 control-label">URL</label>
+
+                            <div class="col-md-6">
+                                <input id="url" type="text" class="form-control" name="url" value="">
+
+                                @if ($errors->has('url'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('url') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('author') ? ' has-error' : '' }}">
-                            <label for="author" class="col-md-4 control-label">author</label>
+                            <label for="author" class="col-md-4 control-label">Author</label>
 
                             <div class="col-md-6">
                                 <select id="author" type="author" class="form-control" name="author">

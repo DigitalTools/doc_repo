@@ -21,8 +21,8 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Author</th>
                                     <th>URL</th>
+                                    <th>Author</th>
                                     <th>Score</th>
                                     <th>Magnitude</th>
                                 </tr>
