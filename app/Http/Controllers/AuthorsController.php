@@ -91,4 +91,11 @@ class AuthorsController extends Controller
 
     }
 
+
+    public function authors()
+    {
+        $authors = Author::all();
+        return view('authors.authors', compact('authors'));
+    }
+
 }
