@@ -31,5 +31,7 @@ Route::post('/article/{id}/edit', 'ArticlesController@update')->name('article.up
 
 Route::get('/articles/by_author/{author_id}', 'ArticlesController@articlesByAuthor')->name('articles.byAuthor');
 
+Route::get('/author/{id}', 'AuthorsController@show');
+
 Route::get('/url', 'Source\ListController@input');
 Route::post('/url', 'Source\ListController@parse');
