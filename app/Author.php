@@ -16,4 +16,11 @@ class Author extends Model
         return $this->hasMany(Article::class);
     }
 
+    public function stats($id)
+    {
+
+        
+
+    }
+
 }

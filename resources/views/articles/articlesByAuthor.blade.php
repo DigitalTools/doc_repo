@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'My Articles')
+@section('title')
+    Articles by {{$author->name}}
+@stop
 
 @section('content')
     <div class="row">
@@ -10,7 +12,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-file"> My Articles</i>
+                    <i class="fa fa-file"> {{ $articles->total() }} Articles by {{ $author->name }}</i>
                 </div>
 
                 <div class="panel-body">
@@ -21,7 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Author</th>
                                     <th>URL</th>
                                     <th>Score</th>
                                     <th>Magnitude</th>
@@ -42,12 +43,6 @@
                                             <i class="fa fa-link"></i>
                                         @endif
                                     </td>
-                                    <td>
-                                    @foreach ($authors as $author)
-                                        @if ($author->id === $article->author_id)
-                                            {{ $author->alias }}
-                                        @endif
-                                    @endforeach</td>
                                     <td>{{ $article->score }}</td>
                                     <td>{{ $article->magnitude }}</td>
                                 </tr>

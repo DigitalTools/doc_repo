@@ -9,7 +9,7 @@ class Article extends Model
     //
 
     protected $fillable = [
-        'user_id', 'title', 'body', 'author_id'
+        'user_id', 'title', 'body', 'author_id', 'url', 'published_on'
     ];
 
     public function author()
